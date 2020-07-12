@@ -1,5 +1,6 @@
 package com.shihlinchen90.bmi
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        b_help.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Help")
+                .setMessage("Body mass index (BMI) is a value derived from the mass (weight) and height of a person.")
+                .setPositiveButton("OK", null)
+                .show()
+        }
     }
 
     fun bmi(view: View) {
@@ -25,7 +34,10 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("BMI")
             .setMessage("Your BMI : $bmi")
-            .setPositiveButton("OK", null)
+            .setPositiveButton("OK") { dialog, which ->
+                ed_weight.setText("")
+                ed_height.setText("")
+            }
             .show()
     }
 }
